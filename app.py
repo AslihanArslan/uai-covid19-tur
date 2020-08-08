@@ -75,19 +75,26 @@ def hello():
             y_1.append(int(pol_reg.predict(poly_reg.fit_transform([[len(y)+i]]))[0]))
         return y_1
 
-    df=pd.read_csv('./data/COVID.csv', index_col=False)
-    titles=list(df.columns.values)
-    titles.pop()
+    df=pd.read_csv('https://raw.githubusercontent.com/ozanerturk/covid19-turkey-api/master/dataset/timeline.csv', index_col=False)
+    titles=['Taih', 'Günlük Vaka Sayısı', 'Toplam Vaka Sayısı', 'Günlük İyileşen Sayısı', 'Toplam İyileşen Sayısı', 'Günlük Vefat Sayısı', 'Toplam Vefat Sayısı', 'Günlük Test Sayısı', 'Toplam Test Sayısı']
+
     dates=df[df.columns[0]].tolist()
-    gvs=df[df.columns[1]].tolist()
+    dates=[x.replace("/",".") for x in dates]
+    
+    gvs=df[df.columns[8]].tolist()
     tvs=df[df.columns[2]].tolist()
-    gis=df[df.columns[3]].tolist()
-    tis=df[df.columns[4]].tolist()
-    gvs2=df[df.columns[5]].tolist()
-    tvs2=df[df.columns[6]].tolist()
+    
+    gis=df[df.columns[10]].tolist()
+    tis=df[df.columns[6]].tolist()
+    
+    gvs2=df[df.columns[9]].tolist()
+    tvs2=df[df.columns[3]].tolist()
+    
     gts=df[df.columns[7]].tolist()
-    tts=df[df.columns[8]].tolist()
-    indexes=df[df.columns[9]].tolist()
+    tts=df[df.columns[1]].tolist()
+    
+    indexes= [i for i in range(1,len(tts)+1)]
+    print(indexes)
 
     seven_days_period=[]
     for i in range(1,8):
@@ -95,7 +102,7 @@ def hello():
         enddate=pd.to_datetime(startdate, dayfirst=True) + pd.DateOffset(days=i)
         enddate=enddate.strftime('%d.%m.%Y')
         seven_days_period.append(enddate)
-
+    
     gvs_1=get_seven_days_prediction(indexes,gvs)
     tvs_1=get_seven_days_prediction(indexes,tvs)
     gis_1=get_seven_days_prediction(indexes,gis)
