@@ -74,7 +74,8 @@ def hello():
         for i in range(1,8):
             y_1.append(int(pol_reg.predict(poly_reg.fit_transform([[len(y)+i]]))[0]))
         return y_1
-
+    # data/COVID_API.csv
+    # https://raw.githubusercontent.com/ozanerturk/covid19-turkey-api/master/dataset/timeline.csv
     df=pd.read_csv('https://raw.githubusercontent.com/ozanerturk/covid19-turkey-api/master/dataset/timeline.csv', index_col=False)
     titles=['Taih', 'Günlük Vaka Sayısı', 'Toplam Vaka Sayısı', 'Günlük İyileşen Sayısı', 'Toplam İyileşen Sayısı', 'Günlük Vefat Sayısı', 'Toplam Vefat Sayısı', 'Günlük Test Sayısı', 'Toplam Test Sayısı']
 
