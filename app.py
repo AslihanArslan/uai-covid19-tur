@@ -94,7 +94,6 @@ def hello():
     tts=df[df.columns[1]].tolist()
     
     indexes= [i for i in range(1,len(tts)+1)]
-    print(indexes)
 
     seven_days_period=[]
     for i in range(1,8):
@@ -133,7 +132,6 @@ def hello():
     tts_holt_week=get_holt_value(tts,dates_range)
 
     gvs_holt_finish, for_message=get_holt_finish_getnumber(gvs,dates_range)
-    print(gvs_holt_finish, for_message)
     start_pred_date=dates[-1]
     end_pred_date=pd.to_datetime(start_pred_date, dayfirst=True) + pd.DateOffset(gvs_holt_finish-1)
     end_pred_date=end_pred_date.strftime('%d.%m.%Y')
